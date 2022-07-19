@@ -1,0 +1,36 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+using GoogleMobileAds.Api;
+using GoogleMobileAds.Placement;
+
+public class MainScene : MonoBehaviour
+{
+    InterstitialAdGameObject interstitialAd;
+    RewardedAdGameObject rewardedAd;
+
+    void Start()
+    {
+
+        interstitialAd = MobileAds.Instance
+            .GetAd<InterstitialAdGameObject>("Interstitial Ad");
+        rewardedAd = MobileAds.Instance
+            .GetAd<RewardedAdGameObject>("Rewarded Ad");
+
+        //SDK初期化
+        MobileAds.Initialize((initStatus) => {
+        });
+    }
+
+    public void OninterstitialAd()
+    {
+        interstitialAd.LoadAd();
+        interstitialAd.ShowIfLoaded();
+    }
+    public void OnrewardedAd()
+    {
+        rewardedAd.LoadAd();
+        rewardedAd.ShowIfLoaded();
+    }
+
+}
